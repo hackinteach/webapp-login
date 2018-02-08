@@ -91,6 +91,17 @@
             <version>2.6</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -102,7 +113,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>io.muic.cs.ooc.webapp.Main</mainClass>
+                            <mainClass>io.muic.cs.ooc.webapp.login.Main</mainClass>
                             <name>app</name>
                         </program>
                     </programs>
