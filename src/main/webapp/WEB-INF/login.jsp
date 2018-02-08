@@ -8,9 +8,15 @@
 </head>
 <body style="background-color:#00589F"></body>
 
-<c:if test="${error}">
+<c:if test="${invalidLogin}">
     <script type="text/javascript">
         alert("Invalid Login");
+    </script>
+</c:if>
+
+<c:if test="${emptyField}">
+    <script type="text/javascript">
+        alert("username and password can not be empty");
     </script>
 </c:if>
 
@@ -26,7 +32,7 @@
         <input type="password" class="form-control" name="password" placeholder="Password">
     </div>
     <button type="submit" formaction="/login" class="btn btn-primary">Submit</button>
-    <button type="submit" formaction="/register" class="btn btn-primary">Register</button>
+    <button type="submit" formaction="/register" formmethod="get" class="btn btn-primary">Register</button>
 </form>
 </span>
 </body>
