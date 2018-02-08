@@ -75,8 +75,6 @@ public class MySQL {
             if (resultSet.first()) {
                 String pwdFromDB = resultSet.getString("password");
                 return pwdFromDB.equals(password);
-            } else {
-                System.out.println("Error querying database.");
             }
 
         } catch (SQLException e) {
@@ -125,10 +123,11 @@ public class MySQL {
             preparedStatement = getConnection().prepareStatement(sql);
             preparedStatement.setString(1,username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if(resultSet.first()){
                 User user = new User();
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+                return user;
             }
 
         } catch (SQLException e) {
