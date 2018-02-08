@@ -12,6 +12,9 @@
 </head>
 <body>
 <h2>Login Success</h2>
-<h2>Welcome, ${user.getUsername()}</h2>
+<h2>Welcome, ${LOGIN_USER.getUsername()}</h2>
+<form method="get" action="/logout">
+    <input type="submit" value="logout">
+</form>
 </body>
 </html>
