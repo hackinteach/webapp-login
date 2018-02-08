@@ -24,11 +24,8 @@ public class UserServlet extends HttpServlet implements Routeable {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
+        rq.include(req,resp);
         User user =  (User)req.getSession().getAttribute("user");
-        PrintWriter writer  = resp.getWriter();
-        writer.append("Hi, "+user.getUsername());
-        writer.flush();
-        writer.close();
     }
 
     @Override
