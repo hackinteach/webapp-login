@@ -1,7 +1,6 @@
-package io.muic.cs.ooc.webapp.servlet;
+package io.muic.cs.ooc.webapp.login.servlet;
 
-import io.muic.cs.ooc.webapp.Routeable;
-import io.muic.cs.ooc.webapp.service.LoginService;
+import io.muic.cs.ooc.webapp.login.Routeable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

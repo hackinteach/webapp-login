@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.muic.cs.ooc.webapp;
+package io.muic.cs.ooc.webapp.login;
 
+import io.muic.cs.ooc.webapp.login.servlet.*;
 import io.muic.cs.ooc.webapp.servlet.*;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;

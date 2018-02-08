@@ -1,4 +1,4 @@
-package io.muic.cs.ooc.webapp;
+package io.muic.cs.ooc.webapp.login;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;

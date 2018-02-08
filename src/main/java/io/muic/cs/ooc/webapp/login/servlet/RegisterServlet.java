@@ -1,6 +1,6 @@
-package io.muic.cs.ooc.webapp.servlet;
+package io.muic.cs.ooc.webapp.login.servlet;
 
-import io.muic.cs.ooc.webapp.Routeable;
+import io.muic.cs.ooc.webapp.login.Routeable;
 import io.muic.cs.ooc.webapp.service.RegisterService;
 import io.muic.cs.ooc.webapp.user.User;
 

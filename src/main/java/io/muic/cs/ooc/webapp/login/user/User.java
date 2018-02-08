@@ -1,10 +1,7 @@
-package io.muic.cs.ooc.webapp.user;
-
-import io.muic.cs.ooc.webapp.user.AbstractEntity;
+package io.muic.cs.ooc.webapp.login.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Index;
 import javax.persistence.Table;
 import java.io.Serializable;
 

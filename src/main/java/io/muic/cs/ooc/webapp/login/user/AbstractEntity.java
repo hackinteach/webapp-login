@@ -1,4 +1,4 @@
-package io.muic.cs.ooc.webapp.user;
+package io.muic.cs.ooc.webapp.login.user;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

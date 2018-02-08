@@ -1,13 +1,12 @@
-package io.muic.cs.ooc.webapp.servlet;/*
+package io.muic.cs.ooc.webapp.login.servlet;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
 
-import io.muic.cs.ooc.webapp.Routeable;
+import io.muic.cs.ooc.webapp.login.Routeable;
 import io.muic.cs.ooc.webapp.service.LoginService;
-import io.muic.cs.ooc.webapp.user.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
