@@ -65,4 +65,18 @@ public class MySQLTest {
         assertEquals("admin",admin.getUsername());
         assertEquals("1234",admin.getPassword());
     }
+
+    @Test
+    public void testUserExists(){
+        boolean hackinteachExists = mySQL.isUserExists("hackinteach");
+        assertTrue(hackinteachExists);
+
+        boolean adminExists = mySQL.isUserExists("admin");
+        assertTrue(adminExists);
+
+        boolean falseOne = mySQL.isUserExists("koo");
+        boolean falseTwo = mySQL.isUserExists("user");
+        assertFalse(falseOne);
+        assertFalse(falseTwo);
+    }
 }

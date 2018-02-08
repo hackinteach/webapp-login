@@ -44,6 +44,21 @@ public class MySQL {
     }
 
     //@TODO Check user exists.
+    public boolean isUserExists(String username){
+        try{
+            String query = "select username from "+dbTable+" where username=?;";
+            preparedStatement = getConnection().prepareStatement(query);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.first()){
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
