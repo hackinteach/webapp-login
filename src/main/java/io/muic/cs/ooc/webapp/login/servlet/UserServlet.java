@@ -13,7 +13,7 @@ public class UserServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/model.jsp");
         rd.include(request,response);
     }
 
@@ -24,6 +24,6 @@ public class UserServlet extends HttpServlet implements Routeable {
 
     @Override
     public String getMapping() {
-        return "/user";
+        return "/model";
     }
 }

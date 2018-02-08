@@ -6,10 +6,8 @@ package io.muic.cs.ooc.webapp.login.servlet;/*
 
 
 import io.muic.cs.ooc.webapp.login.Routeable;
-import io.muic.cs.ooc.webapp.service.LoginService;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +17,7 @@ import java.io.IOException;
  *
  * @author hackinteach
  */
+@WebServlet(urlPatterns = {"/"})
 public class HomeServlet extends HttpServlet implements Routeable {
 
     @Override
@@ -28,18 +27,5 @@ public class HomeServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginService loginService = new LoginService();
-
-//        for(User u : loginService.getListOfUsers()){
-//            response.getWriter().append(u.getUsername()).append(u.getPassword());
-//        }
-        boolean authenticated = loginService.isAuthorized();
-        response.getWriter().append(Boolean.toString(authenticated));
-        if(authenticated){
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/home.jsp");
-            rd.include(request,response);
-        }else{
-            response.sendRedirect("/login");
-        }
     }
 }
