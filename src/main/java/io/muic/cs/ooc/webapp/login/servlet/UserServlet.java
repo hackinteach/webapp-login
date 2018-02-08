@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class UserServlet extends HttpServlet implements Routeable {
 
@@ -25,7 +24,6 @@ public class UserServlet extends HttpServlet implements Routeable {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
         rq.include(req,resp);
-        User user =  (User)req.getSession().getAttribute("user");
     }
 
     @Override
