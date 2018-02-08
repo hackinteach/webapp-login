@@ -20,6 +20,9 @@ public class ServletRouter {
     static {
         routeables.add(HomeServlet.class);
         routeables.add(LoginServlet.class);
+        routeables.add(UserServlet.class);
+        routeables.add(RegisterServlet.class);
+        routeables.add(LogoutServlet.class);
     }
 
     public void init(Context ctx) {
