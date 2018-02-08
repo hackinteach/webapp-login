@@ -1,4 +1,3 @@
-<%@ page import="io.muic.cs.ooc.webapp.servlet.RegisterServlet" %>
 <%--
   Created by IntelliJ IDEA.
   User: hackinteachk.
