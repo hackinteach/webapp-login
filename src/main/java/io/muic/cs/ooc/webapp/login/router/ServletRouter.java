@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.muic.cs.ooc.webapp.login;
+package io.muic.cs.ooc.webapp.login.router;
 
+import io.muic.cs.ooc.webapp.login.database.MySQL;
 import io.muic.cs.ooc.webapp.login.servlet.*;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
@@ -17,17 +18,16 @@ public class ServletRouter {
 
     private static final List<Class<? extends Routeable>> routeables = new ArrayList<>();
     static {
-        routeables.add(LoginServlet.class);
-        routeables.add(RegisterServlet.class);
         routeables.add(HomeServlet.class);
-        routeables.add(LogoutServlet.class);
-        routeables.add(UserServlet.class);
+        routeables.add(LoginServlet.class);
     }
 
     public void init(Context ctx) {
+        MySQL mySQL = new MySQL();
         for (Class<? extends Routeable> routeableClass: routeables) {
             try {
                 Routeable routeable = routeableClass.newInstance();
+                routeable.setMySQL(mySQL);
                 String name = routeable.getClass().getSimpleName();
                 Tomcat.addServlet(ctx, name, (HttpServlet) routeable);
                 ctx.addServletMapping(routeable.getMapping(), name);
