@@ -18,10 +18,10 @@ public class ServletRouter {
 
     private static final List<Class<? extends Routeable>> routeables = new ArrayList<>();
     static {
-        routeables.add(HomeServlet.class);
+//        routeables.add(HomeServlet.class);
         routeables.add(LoginServlet.class);
         routeables.add(UserServlet.class);
-        routeables.add(RegisterServlet.class);
+//        routeables.add(RegisterServlet.class);
         routeables.add(LogoutServlet.class);
     }
 
