@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LoginService{
+public class LoginService extends Service{
 
-    private MySQL mySQL = new MySQL();
     private HttpServletRequest request;
     private HttpServletResponse response;
 
@@ -24,7 +23,8 @@ public class LoginService{
         return mySQL.authenticate(username,password);
     }
 
-    public void error(String msg, String path){
+    @Override
+    public void error(String msg, String path) {
         try {
             System.out.println(msg);
             request.setAttribute("error",msg);
