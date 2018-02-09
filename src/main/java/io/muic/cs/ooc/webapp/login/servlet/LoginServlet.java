@@ -27,11 +27,10 @@ public class LoginServlet extends HttpServlet implements Routeable {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-//        boolean passed = mySQL.authenticate(username, password);
         LoginService lis = new LoginService(request,response);
-        boolean passed = lis.login(username,password);
 
         if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
+            boolean passed = lis.login(username,password);
             if(passed){
                 System.out.println("Authenticate successful");
                 User user = mySQL.getUserbyUsername(username);
