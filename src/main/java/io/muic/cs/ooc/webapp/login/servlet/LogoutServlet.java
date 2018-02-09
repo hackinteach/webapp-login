@@ -18,14 +18,13 @@ public class LogoutServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
-        rd.include(request,response);
+        request.getSession().invalidate();
+        response.sendRedirect("/login");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().invalidate();
-        response.sendRedirect("/login");
+
     }
 
     @Override
