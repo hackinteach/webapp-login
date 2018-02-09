@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet implements Routeable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
-        rd.include(request,response);
+        rd.forward(request,response);
     }
 
     @Override
@@ -28,23 +28,25 @@ public class LoginServlet extends HttpServlet implements Routeable {
         String password = request.getParameter("password");
         boolean passed = mySQL.authenticate(username, password);
 
-        request.getSession().removeAttribute("invalidLogin");
-        request.getSession().removeAttribute("emptyField");
-
         if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
             if(passed){
                 System.out.println("Authenticate successful");
                 User user = mySQL.getUserbyUsername(username);
-                request.getSession().setAttribute("LOGIN_USER", user);
-                request.getSession().removeAttribute("error");
+                request.getSession().setAttribute("user", user);
+//                RequestDispatcher rq = request.getRequestDispatcher("WEB-INF/user.jsp");
+//                rq.forward(request,response);
                 response.sendRedirect("/user");
             }else{
-                request.getSession().setAttribute("invalidLogin",true);
-                response.sendRedirect("/login");
+                System.out.println("Invalid Login");
+                request.setAttribute("error","Invalid Login");
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
+                rd.include(request, response);
             }
         }else{
-            request.getSession().setAttribute("emptyField",true);
-            response.sendRedirect("/login");
+            System.out.println("Empty field");
+            request.setAttribute("error","username and password cannot be empty");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
+            rd.include(request, response);
         }
     }
 
