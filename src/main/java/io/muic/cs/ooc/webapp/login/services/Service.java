@@ -11,10 +11,18 @@ import java.io.IOException;
 public abstract class Service {
 
     protected MySQL mySQL = new MySQL();
-    private HttpServletRequest request;
-    private HttpServletResponse response;
 
-
-    abstract public void error(String msg, String path);
+    public void error(HttpServletRequest request, HttpServletResponse response, String msg, String path) {
+        try {
+            System.out.println(msg);
+            request.setAttribute("error",msg);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+            requestDispatcher.include(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

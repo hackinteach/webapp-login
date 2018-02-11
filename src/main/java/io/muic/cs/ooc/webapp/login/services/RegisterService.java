@@ -30,18 +30,4 @@ public class RegisterService extends Service{
     public User getUser(String username){
         return mySQL.getUserbyUsername(username);
     }
-
-    @Override
-    public void error(String msg, String path) {
-        try {
-            System.out.println(msg);
-            request.setAttribute("error",msg);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-            requestDispatcher.include(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
