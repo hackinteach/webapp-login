@@ -21,16 +21,14 @@ public class ServletRouter {
 //        routeables.add(HomeServlet.class);
         routeables.add(LoginServlet.class);
         routeables.add(UserServlet.class);
-//        routeables.add(RegisterServlet.class);
+        routeables.add(RegisterServlet.class);
         routeables.add(LogoutServlet.class);
     }
 
     public void init(Context ctx) {
-        MySQL mySQL = new MySQL();
         for (Class<? extends Routeable> routeableClass: routeables) {
             try {
                 Routeable routeable = routeableClass.newInstance();
-                routeable.setMySQL(mySQL);
                 String name = routeable.getClass().getSimpleName();
                 Tomcat.addServlet(ctx, name, (HttpServlet) routeable);
                 ctx.addServletMapping(routeable.getMapping(), name);
