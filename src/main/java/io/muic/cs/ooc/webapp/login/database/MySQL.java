@@ -7,15 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQL {
+
     private static final String dbUrl = "jdbc:mysql://127.0.0.1:3307/login?useSSL=false";
     private static final String dbUser = "ooc";
     private static final String dbPassword = "muic";
     private static final String dbTable = "credentials";
     private static Connection connection = null;
-    private ResultSet resultSet;
-    private PreparedStatement preparedStatement;
+    private static ResultSet resultSet;
+    private static PreparedStatement preparedStatement;
 
-    private Connection getConnection() {
+    private static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             if (connection == null || connection.isClosed()) {
@@ -43,8 +44,7 @@ public class MySQL {
         }
     }
 
-    //@TODO Check user exists.
-    public boolean isUserExists(String username){
+    public static boolean isUserExists(String username){
         try{
             String query = "select username from "+dbTable+" where username=?;";
             preparedStatement = getConnection().prepareStatement(query);
@@ -60,7 +60,7 @@ public class MySQL {
         return false;
     }
 
-    public List<User> getUsers() {
+    public static List<User> getUsers() {
         List<User> users = new ArrayList<>();
         try {
             String query = "select username, password from " + dbTable;
@@ -80,7 +80,7 @@ public class MySQL {
         return users;
     }
 
-    public boolean authenticate(String username, String password) {
+    public static boolean authenticate(String username, String password) {
 
         try {
             String sql = "select password from "+ dbTable+" where username=?;";
@@ -111,7 +111,10 @@ public class MySQL {
         return false;
     }
 
-    public boolean createUser(String username, String password){
+    public static boolean createUser(String username, String password){
+        if(isUserExists(username)){
+            return false;
+        }
         try{
             String sql = "insert into " + dbTable + "(username,password) values (?,?);";
             preparedStatement = getConnection().prepareStatement(sql);
@@ -131,7 +134,7 @@ public class MySQL {
         }
     }
 
-    public User getUserbyUsername(String username){
+    public static User getUserbyUsername(String username){
 
         try{
             String sql = "select username, password from "+dbTable+" where username = ?;";
