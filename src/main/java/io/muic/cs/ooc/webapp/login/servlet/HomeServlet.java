@@ -5,19 +5,20 @@ package io.muic.cs.ooc.webapp.login.servlet;/*
  */
 
 
-import io.muic.cs.ooc.webapp.login.Routeable;
+import io.muic.cs.ooc.webapp.login.database.MySQL;
+import io.muic.cs.ooc.webapp.login.router.Routeable;
+import io.muic.cs.ooc.webapp.login.utils.CookieUtil;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- *
  * @author hackinteach
  */
-@WebServlet(urlPatterns = {"/"})
 public class HomeServlet extends HttpServlet implements Routeable {
 
     @Override
@@ -27,5 +28,11 @@ public class HomeServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean authorized = CookieUtil.verifyCookie(request,response);
+        if(authorized){
+            response.sendRedirect("/user");
+        }else{
+            response.sendRedirect("/login");
+        }
     }
 }
