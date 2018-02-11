@@ -15,8 +15,6 @@ import java.io.IOException;
 
 public class RegisterServlet extends HttpServlet implements Routeable {
 
-    private MySQL mySQL;
-
     @Override
     public String getMapping() {
         return "/register";
@@ -37,22 +35,18 @@ public class RegisterServlet extends HttpServlet implements Routeable {
         if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
             if(registerService.dupUser(username)){
                 String error = "Username already taken. Please try again.";
-                registerService.error(error,"WEB-INF/register.jsp");
+                registerService.error(req, resp,error,"WEB-INF/register.jsp");
             }else{
-                if(mySQL.createUser(username,password)){
-                    User user = mySQL.getUserbyUsername(username);
+                if(registerService.register(username,password)){
+                    User user = MySQL.getUserbyUsername(username);
                     req.getSession().setAttribute("user",user);
                     resp.sendRedirect("/user");
                 }
             }
         }else{
             String error = "cannot create blank user";
-            registerService.error(error,"WEB-INF/register.jsp");
+            registerService.error(req,resp,error,"WEB-INF/register.jsp");
         }
     }
 
-    @Override
-    public void setMySQL(MySQL mySQL) {
-        this.mySQL = mySQL;
-    }
 }
