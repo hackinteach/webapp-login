@@ -3,6 +3,8 @@ package io.muic.cs.ooc.webapp.login.servlet;
 import io.muic.cs.ooc.webapp.login.database.MySQL;
 import io.muic.cs.ooc.webapp.login.model.User;
 import io.muic.cs.ooc.webapp.login.router.Routeable;
+import io.muic.cs.ooc.webapp.login.services.UserService;
+import io.muic.cs.ooc.webapp.login.utils.CookieUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +15,6 @@ import java.io.IOException;
 
 public class UserServlet extends HttpServlet implements Routeable {
 
-    private MySQL mySQL;
-
     @Override
     public String getMapping() {
         return "/user";
@@ -22,12 +22,14 @@ public class UserServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
-        rq.include(req,resp);
-    }
-
-    @Override
-    public void setMySQL(MySQL mySQL) {
-        this.mySQL = mySQL;
+        if(!CookieUtil.verifyCookie(req,resp)){
+            resp.sendRedirect("/login");
+        }else{
+            UserService userService = new UserService();
+            User user = CookieUtil.getUser(req,resp);
+            req.setAttribute("user",user);
+            RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
+            rq.include(req,resp);
+        }
     }
 }
