@@ -1,5 +1,8 @@
 package io.muic.cs.ooc.webapp.login.utils;
 
+import io.muic.cs.ooc.webapp.login.database.MySQL;
+import io.muic.cs.ooc.webapp.login.model.User;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,12 +14,14 @@ public class CookieUtil {
         res.addCookie(cookie);
     }
 
-    public static boolean verifyCookie(HttpServletRequest req, HttpServletResponse res, String username){
+    public static boolean verifyCookie(HttpServletRequest req, HttpServletResponse res){
         Cookie[] cookies = req.getCookies();
-        for (int i = 0; cookies != null && i < cookies.length; i++)
-            if(cookies[i].getValue().equals(username)){
+        for (int i = 0; cookies != null && i < cookies.length; i++){
+            if("userCookie".equals(cookies[i].getName())){
                 return true;
             }
+        }
+
         return false;
     }
 
@@ -27,5 +32,17 @@ public class CookieUtil {
             cookie.setMaxAge(0); // 0 will delete cookie (According to API Docs)
             res.addCookie(cookie);
         }
+    }
+
+    public static User getUser(HttpServletRequest request, HttpServletResponse response){
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; cookies != null && i < cookies.length; i++){
+            if("userCookie".equals(cookies[i].getName())){
+                String username = cookies[i].getValue();
+                User user = MySQL.getUserbyUsername(username);
+                return user;
+            }
+        }
+        return null;
     }
 }
