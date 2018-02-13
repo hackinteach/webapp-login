@@ -31,6 +31,7 @@
 <table class="table table-hover table-dark w-50" align="center" style="border: 2px solid whitesmoke">
     <thead>
     <tr>
+        <th scope="col">#</th>
         <th scope="col">Username</th>
         <th scope="col">Firstname</th>
         <th scope="col">Lastname</th>
@@ -43,6 +44,7 @@
     for(User u : users){
 %>
 <tr style="color:whitesmoke">
+    <td><%= u.getid() %></td>
     <td><%= u.getUsername() %></td>
     <td><%= u.getFirstname() %></td>
     <td><%= u.getLastname() %></td>
