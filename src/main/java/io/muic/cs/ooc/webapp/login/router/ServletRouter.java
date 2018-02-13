@@ -24,6 +24,7 @@ public class ServletRouter {
         routeables.add(RegisterServlet.class);
         routeables.add(LogoutServlet.class);
         routeables.add(RemoveUserServlet.class);
+        routeables.add(ErrorURLServlet.class);
     }
 
     public void init(Context ctx) {
