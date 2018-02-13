@@ -19,13 +19,11 @@ public class RemoveUserServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("In remove");
-        if(!CookieUtil.verifyCookie(req,resp)){
-//            resp.sendRedirect("/login");
+        if(!CookieUtil.verifyCookie(req,resp)) {
+            resp.sendRedirect("/login");
             return;
         }
         String username = req.getParameter("removeUser");
-        System.out.println("Removing " +username);
         MySQL.removeUserbyUsername(username);
         resp.sendRedirect("/user");
     }
