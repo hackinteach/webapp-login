@@ -159,6 +159,21 @@ public class MySQL {
         }
     }
 
+    public static boolean removeUserbyUsername(String username){
+        if(!isUserExists(username)){
+            return false;
+        }
+        try{
+            String sql = "delete from "+dbTable+" where username = ?;";
+            preparedStatement = getConnection().prepareStatement(sql);
+            preparedStatement.setString(1,username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return false;
+    }
+
     public static User getUserbyUsername(String username){
 
         try{

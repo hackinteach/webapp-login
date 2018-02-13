@@ -60,6 +60,12 @@ public class MySQLTest {
     }
 
     @Test
+    public void testDeleteUser(){
+//        assertFalse(MySQL.removeUserbyUsername("nuttapat"));
+//        assertTrue(MySQL.removeUserbyUsername("hackinteach"));
+    }
+
+    @Test
     public void testGetUserByUsername(){
         User hackinteach = MySQL.getUserbyUsername("hackinteach");
         assertEquals("hackinteach",hackinteach.getUsername());
