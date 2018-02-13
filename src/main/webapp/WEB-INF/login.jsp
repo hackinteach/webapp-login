@@ -1,39 +1,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
+
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/css/common.css" rel="stylesheet">
+
 </head>
-<body style="background-color:#00589F"></body>
+<body>
 
-<c:if test="${invalidLogin}">
+<c:if test="${not empty error}">
     <script type="text/javascript">
-        alert("Invalid Login");
+        alert('${error}');
     </script>
 </c:if>
 
-<c:if test="${emptyField}">
-    <script type="text/javascript">
-        alert("username and password can not be empty");
-    </script>
-</c:if>
+<div class="container">
 
-<h2 align="center" style="color:white">Login</h2>
-<form action="/login" method="post" class="mx-auto" style="width:30%">
-    <div class="form-group">
-        <label style="color:white">Username</label>
-        <input type="text" class="form-control" name="username" placeholder="Username">
-        <%--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--%>
-    </div>
-    <div class="form-group">
-        <label style="color:white">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
-    </div>
-    <button type="submit" formaction="/login" class="btn btn-primary">Submit</button>
-    <button type="submit" formaction="/register" formmethod="get" class="btn btn-primary">Register</button>
-</form>
-</span>
+    <form method="POST" action="/login" class="form-signin">
+        <h2 class="form-heading" style="color:whitesmoke; text-align: center">Log in</h2>
+
+        <div class="form-group">
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="window.location.href='/register'">Create an account</button>
+            <%--<h4 class="text-center"><a href="/register">Create an account</a></h4>--%>
+        </div>
+
+    </form>
+
+</div>
 </body>
 </html>
