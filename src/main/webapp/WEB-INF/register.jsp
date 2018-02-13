@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--  Created by IntelliJ IDEA.
   User: hackinteachk.
   Date: 3/2/2018 AD
@@ -5,29 +6,46 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
-    <title>Register new User</title>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
-</head>
-<body>
+    <title>Create Account</title>
 
-<c:if test="${error}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/css/common.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+<c:if test="${not empty error}">
     <script type="text/javascript">
-        alert("Failed to register, please try again.");
+        alert('${error}');
     </script>
 </c:if>
-<div class="container-fluid">
-    <form action="/register" method="post">
-        username: <br/>
-        <input type="text" name="username">
-        <br/>
-        password: <br/>
-        <input type="text" name="password">
-        <br><br/>
-        <input type="submit" value="cancel" formmethod="get" formaction="/login">
-        <input type="submit" value="Submit">
+<div class="container">
+    <form method="POST" action="/register" class="form-signin">
+        <h2 class="form-heading" style="color:whitesmoke; text-align: center">Create Account</h2>
+
+        <div class="form-group">
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="firstname" type="text" class="form-control" placeholder="First Name"/>
+            <input name="lastname" type="text" class="form-control" placeholder="Last Name"/>
+            <input name="email" type="email" class="form-control" placeholder="Email"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="verifyPassword" type="password" class="form-control" placeholder="Type Password Again"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="window.location.href='/login'">Cancel</button>
+            <%--<h4 class="text-center"><a href="/register">Create an account</a></h4>--%>
+        </div>
     </form>
+
 </div>
 </body>
 </html>
