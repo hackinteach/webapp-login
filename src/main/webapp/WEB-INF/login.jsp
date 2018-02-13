@@ -33,10 +33,12 @@
             <input name="username" type="text" class="form-control" placeholder="Username"
                    autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="window.location.href='/register'">Create an account</button>
-            <%--<h4 class="text-center"><a href="/register">Create an account</a></h4>--%>
+            <div class="text-center">
+                <form action="/login" method="post">
+                    <button type="submit" class="btn btn-outline-primary">Login</button>
+                </form>
+                <button class="btn btn-outline-success" type="button" onclick="window.location.href='/register'">Create an account</button>
+            </div>
         </div>
 
     </form>
