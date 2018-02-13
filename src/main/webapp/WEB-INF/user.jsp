@@ -27,6 +27,7 @@
 <body >
 
 <h2 class="form-heading" style="color:whitesmoke" align="center">Welcome, ${user.getFirstname()}</h2>
+<p style="color:whitesmoke" align="center">${user.getFirstname()} ${user.getLastname()}, ${user.getEmail()}</p>
 <br/>
 <table class="table table-hover table-dark w-50" align="center" style="border: 2px solid whitesmoke">
     <thead>
