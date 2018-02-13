@@ -28,6 +28,7 @@
         alert('${error}');
     </script>
 </c:if>
+
 <div class="container">
     <form method="POST" action="/register" class="form-signin">
         <h2 class="form-heading" style="color:whitesmoke; text-align: center">Create Account</h2>
@@ -40,9 +41,13 @@
             <input name="email" type="email" class="form-control" placeholder="Email"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <input name="verifyPassword" type="password" class="form-control" placeholder="Type Password Again"/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="window.location.href='/login'">Cancel</button>
-            <%--<h4 class="text-center"><a href="/register">Create an account</a></h4>--%>
+
+            <div class="text-center">
+                <form action="/register" method="post">
+                    <button class="btn btn-outline-light" type="submit">Register</button>
+                </form>
+                <button class="btn btn-outline-info" type="button" onclick="window.location.href='/login'">Cancel</button>
+            </div>
         </div>
     </form>
 
