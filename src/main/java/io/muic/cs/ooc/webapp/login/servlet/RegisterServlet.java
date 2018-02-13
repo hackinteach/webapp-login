@@ -34,9 +34,15 @@ public class RegisterServlet extends HttpServlet implements Routeable {
         String firstname=  req.getParameter("firstname");
         String lastname=  req.getParameter("lastname");
         String email=  req.getParameter("email");
+        Boolean blankFields = StringUtils.isBlank(username) ||
+                StringUtils.isBlank(password) ||
+                StringUtils.isBlank(vpassword) ||
+                StringUtils.isBlank(firstname) ||
+                StringUtils.isBlank(lastname) ||
+                StringUtils.isBlank(email);
         RegisterService registerService = new RegisterService(req,resp);
 
-        if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
+        if(!blankFields){
             if(registerService.dupUser(username)){
                 String error = "Username already taken. Please try again.";
                 registerService.error(req, resp,error,"WEB-INF/register.jsp");
@@ -54,7 +60,7 @@ public class RegisterServlet extends HttpServlet implements Routeable {
                 }
             }
         }else{
-            String error = "cannot create blank user";
+            String error = "Cannot leave any field blank!";
             registerService.error(req,resp,error,"WEB-INF/register.jsp");
         }
     }
