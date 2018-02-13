@@ -19,8 +19,12 @@ public class LoginServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
-        rd.forward(request,response);
+        if(CookieUtil.verifyCookie(request,response)){
+            response.sendRedirect("/user");
+        }else {
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/login.jsp");
+            rd.forward(request, response);
+        }
     }
 
     @Override
@@ -28,10 +32,6 @@ public class LoginServlet extends HttpServlet implements Routeable {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         LoginService lis = new LoginService(request,response);
-
-        if(CookieUtil.verifyCookie(request,response)){
-            response.sendRedirect("/user");
-        }
 
         if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
             boolean passed = lis.login(username,password);
