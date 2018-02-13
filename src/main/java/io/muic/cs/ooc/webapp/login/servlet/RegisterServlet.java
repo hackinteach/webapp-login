@@ -30,14 +30,24 @@ public class RegisterServlet extends HttpServlet implements Routeable {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String vpassword = req.getParameter("verifyPassword");
+        String firstname=  req.getParameter("firstname");
+        String lastname=  req.getParameter("lastname");
+        String email=  req.getParameter("email");
         RegisterService registerService = new RegisterService(req,resp);
 
         if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
             if(registerService.dupUser(username)){
                 String error = "Username already taken. Please try again.";
                 registerService.error(req, resp,error,"WEB-INF/register.jsp");
-            }else{
-                if(registerService.register(username,password)){
+            }else if(registerService.dupEmail(email)){
+                String error = "Email already taken. Please try again.";
+                registerService.error(req, resp,error,"WEB-INF/register.jsp");
+            }else if(!password.equals(vpassword)){
+                String error = "Password mismatch";
+                registerService.error(req,resp,error,"WEB-INF/register.jsp");
+            }else {
+                if(registerService.register(username,password,firstname,lastname,email)){
                     User user = MySQL.getUserbyUsername(username);
                     req.getSession().setAttribute("user",user);
                     resp.sendRedirect("/user");
