@@ -23,6 +23,7 @@ public class ServletRouter {
         routeables.add(UserServlet.class);
         routeables.add(RegisterServlet.class);
         routeables.add(LogoutServlet.class);
+        routeables.add(RemoveUserServlet.class);
     }
 
     public void init(Context ctx) {
