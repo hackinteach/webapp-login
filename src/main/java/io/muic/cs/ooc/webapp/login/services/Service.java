@@ -10,8 +10,6 @@ import java.io.IOException;
 
 public abstract class Service {
 
-    protected MySQL mySQL = new MySQL();
-
     public void error(HttpServletRequest request, HttpServletResponse response, String msg, String path) {
         try {
             System.out.println(msg);

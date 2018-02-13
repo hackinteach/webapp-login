@@ -1,6 +1,5 @@
 package io.muic.cs.ooc.webapp.login.servlet;
 
-import io.muic.cs.ooc.webapp.login.database.MySQL;
 import io.muic.cs.ooc.webapp.login.model.User;
 import io.muic.cs.ooc.webapp.login.router.Routeable;
 import io.muic.cs.ooc.webapp.login.services.UserService;
