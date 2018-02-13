@@ -5,6 +5,6 @@
          version="3.0">
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/error/HTTP404.html</location>
+        <location>/error_handler</location>
     </error-page>
 </web-app>
