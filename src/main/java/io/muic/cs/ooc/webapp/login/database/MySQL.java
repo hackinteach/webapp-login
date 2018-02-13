@@ -33,7 +33,7 @@ public class MySQL {
         return connection;
     }
 
-    public void emptyDb(){
+    public static void emptyDb(){
         try {
             Statement statement = getConnection().createStatement();
             String query = "truncate "+dbTable;
@@ -60,10 +60,26 @@ public class MySQL {
         return false;
     }
 
+    public static boolean isEmailExists(String email){
+        try{
+            String query = "select email from "+dbTable+" where email=?;";
+            preparedStatement = getConnection().prepareStatement(query);
+            preparedStatement.setString(1,email);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.first()){
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static List<User> getUsers() {
         List<User> users = new ArrayList<>();
         try {
-            String query = "select username, password from " + dbTable;
+            String query = "select * from " + dbTable;
             preparedStatement = getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -71,6 +87,9 @@ public class MySQL {
                 User user = new User();
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setFirstname(resultSet.getString("firstname"));
+                user.setLastname(resultSet.getString("lastname"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -111,15 +130,20 @@ public class MySQL {
         return false;
     }
 
-    public static boolean createUser(String username, String password){
-        if(isUserExists(username)){
+    public static boolean createUser(String username, String password,
+                                     String firstname, String lastname,
+                                     String email){
+        if(isUserExists(username) || isEmailExists(email)){
             return false;
         }
         try{
-            String sql = "insert into " + dbTable + "(username,password) values (?,?);";
+            String sql = "insert into " + dbTable + "(username,password,firstname,lastname,email) values (?,?,?,?,?);";
             preparedStatement = getConnection().prepareStatement(sql);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password);
+            preparedStatement.setString(3,firstname);
+            preparedStatement.setString(4,lastname);
+            preparedStatement.setString(5,email);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -137,7 +161,7 @@ public class MySQL {
     public static User getUserbyUsername(String username){
 
         try{
-            String sql = "select username, password from "+dbTable+" where username = ?;";
+            String sql = "select * from "+dbTable+" where username = ?;";
             preparedStatement = getConnection().prepareStatement(sql);
             preparedStatement.setString(1,username);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -145,6 +169,9 @@ public class MySQL {
                 User user = new User();
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setFirstname(resultSet.getString("firstname"));
+                user.setLastname(resultSet.getString("lastname"));
                 return user;
             }
 

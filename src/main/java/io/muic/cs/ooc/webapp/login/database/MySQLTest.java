@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 
 public class MySQLTest {
 
-    MySQL mySQL = new MySQL();
-
     @Before
     public void setUp() throws Exception {
 
@@ -23,26 +21,26 @@ public class MySQLTest {
 
     @Before
     public void testCreateUser(){
-        mySQL.emptyDb();
-        boolean hackinteach = mySQL.createUser("hackinteach","koo");
-        boolean admin = mySQL.createUser("admin","1234");
+        MySQL.emptyDb();
+        boolean hackinteach = MySQL.createUser("hackinteach","koo","Nuttapat","Koonarangsri" ,"nuttapat.koo@student.mahidol.edu");
+        boolean admin = MySQL.createUser("admin","1234","Admin","Test","ooc@ooc.com");
         assertTrue("create user failed: hackinteach",hackinteach);
         assertTrue("create user failed: admin",admin);
     }
 
     @Test
     public void testAuthenticate(){
-        boolean trueHackinteach = mySQL.authenticate("hackinteach","koo");
-        boolean wrongHackinteach1 = mySQL.authenticate("hackinteach","1234");
-        boolean wrongHackinteach2 = mySQL.authenticate("koo","hackinteach");
+        boolean trueHackinteach = MySQL.authenticate("hackinteach","koo");
+        boolean wrongHackinteach1 = MySQL.authenticate("hackinteach","1234");
+        boolean wrongHackinteach2 = MySQL.authenticate("koo","hackinteach");
 
         assertTrue(trueHackinteach);
         assertFalse(wrongHackinteach1);
         assertFalse(wrongHackinteach2);
 
-        boolean trueAdmin = mySQL.authenticate("admin","1234");
-        boolean wrongAdmin1 = mySQL.authenticate("admin","koo");
-        boolean wrongAdmin2 = mySQL.authenticate("1234","admin");
+        boolean trueAdmin = MySQL.authenticate("admin","1234");
+        boolean wrongAdmin1 = MySQL.authenticate("admin","koo");
+        boolean wrongAdmin2 = MySQL.authenticate("1234","admin");
 
         assertTrue(trueAdmin);
         assertFalse(wrongAdmin1);
@@ -51,31 +49,37 @@ public class MySQLTest {
 
     @Test
     public void testGetUsers(){
-        List<User> users = mySQL.getUsers();
+        List<User> users = MySQL.getUsers();
         assertTrue(users.size() == 2);
     }
 
     @Test
+    public void testEmailExists(){
+        assertTrue(MySQL.isEmailExists("nuttapat.koo@student.mahidol.edu"));
+        assertFalse(MySQL.isEmailExists("webmaster@hackinteach.com"));
+    }
+
+    @Test
     public void testGetUserByUsername(){
-        User hackinteach = mySQL.getUserbyUsername("hackinteach");
+        User hackinteach = MySQL.getUserbyUsername("hackinteach");
         assertEquals("hackinteach",hackinteach.getUsername());
         assertEquals("koo",hackinteach.getPassword());
 
-        User admin = mySQL.getUserbyUsername("admin");
+        User admin = MySQL.getUserbyUsername("admin");
         assertEquals("admin",admin.getUsername());
         assertEquals("1234",admin.getPassword());
     }
 
     @Test
     public void testUserExists(){
-        boolean hackinteachExists = mySQL.isUserExists("hackinteach");
+        boolean hackinteachExists = MySQL.isUserExists("hackinteach");
         assertTrue(hackinteachExists);
 
-        boolean adminExists = mySQL.isUserExists("admin");
+        boolean adminExists = MySQL.isUserExists("admin");
         assertTrue(adminExists);
 
-        boolean falseOne = mySQL.isUserExists("koo");
-        boolean falseTwo = mySQL.isUserExists("user");
+        boolean falseOne = MySQL.isUserExists("koo");
+        boolean falseTwo = MySQL.isUserExists("user");
         assertFalse(falseOne);
         assertFalse(falseTwo);
     }
