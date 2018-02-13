@@ -15,6 +15,9 @@ import java.io.Serializable;
 public class User extends AbstractEntity implements Serializable {
 
     @Column(nullable = false)
+    private Integer id;
+
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
@@ -28,6 +31,14 @@ public class User extends AbstractEntity implements Serializable {
 
     @Column(nullable = false)
     private String email;
+
+    public Integer getid() {
+        return id;
+    }
+
+    public void setid(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
