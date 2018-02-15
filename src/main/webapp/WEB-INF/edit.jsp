@@ -1,3 +1,5 @@
+<%@ page import="io.muic.cs.ooc.webapp.login.database.MySQL" %>
+<%@ page import="io.muic.cs.ooc.webapp.login.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -6,7 +8,7 @@
 <html>
 <head>
 
-    <title>Login</title>
+    <title>Edit Profile</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,27 +30,97 @@
     </script>
 </c:if>
 
-<div class="container">
+<form action="/edit" method="post">
+    <table class="table table-hover table-dark" align="center" style="border: 2px solid whitesmoke">
+        <thead>
+        <tr>
+            <th scope="col">Field</th>
+            <th scope="col">Information</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
 
-    <form method="POST" action="/login" class="form-signin">
-        <h2 class="form-heading" style="color:whitesmoke; text-align: center">Log in</h2>
+        <%
+            String username = request.getParameter("editUser");
+            User u = MySQL.getUserbyUsername(username);
+            if (u != null) {
+        %>
+        <tr style="color:whitesmoke">
+            <td>
+                Username
+            </td>
+            <td>
+                <%= u.getUsername() %>
+            </td>
+            <td>
+                <input name="username" type="text" class="form-control" placeholder="new username"/>
+            </td>
+        </tr>
 
-        <div class="form-group">
-            <input name="username" type="text" class="form-control" placeholder="Username"
-                   autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <div class="text-center">
-                <form action="/login" method="post">
-                    <button type="submit" class="btn btn-outline-primary">Login</button>
-                </form>
-                <button class="btn btn-outline-success" type="button" onclick="window.location.href='/register'">Create
-                    an account
-                </button>
-            </div>
+        <tr style="color:whitesmoke">
+            <td>
+                First Name
+            </td>
+            <td>
+                <%= u.getFirstname() %>
+            </td>
+            <td>
+                <input name="firstname" type="text" class="form-control" placeholder="new first name"/>
+            </td>
+        </tr>
+
+        <tr style="color:whitesmoke">
+            <td>
+                Last Name
+            </td>
+            <td>
+                <%= u.getLastname() %>
+            </td>
+            <td>
+
+                    <input name="lastname" type="text" class="form-control" placeholder="new last name"/>
+
+            </td>
+        </tr>
+
+        <tr style="color:whitesmoke">
+            <td>
+                Email
+            </td>
+            <td>
+                <%= u.getEmail() %>
+            </td>
+            <td>
+
+                    <input name="email" type="text" class="form-control" placeholder="new email"/>
+
+            </td>
+        </tr>
+
+        <tr style="color:whitesmoke">
+            <td>
+                New Password
+            </td>
+            <td>
+            </td>
+            <td>
+
+                    <input name="new_password" type="password" class="form-control" placeholder="new password"/>
+                    <input name="cf_password" type="password" class="form-control" placeholder="confirm new password"/>
+
+            </td>
+        </tr>
+        <%
+            }
+        %>
+        <tbody>
+    </table>
+
+        <div class="form-group text-center">
+            <button class="btn btn-outline-light" type="submit">Update</button>
+            <button class="btn btn-outline-info" type="button" onclick="window.location.href='/user'">Cancel</button>
         </div>
 
-    </form>
-
-</div>
+</form>
 </body>
 </html>
