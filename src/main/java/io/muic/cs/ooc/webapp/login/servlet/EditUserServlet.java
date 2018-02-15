@@ -62,7 +62,7 @@ public class EditUserServlet extends HttpServlet implements Routeable {
                 && new_pwd.equals(confirm_new_pwd)){
             newProfile.put("password",new_pwd);
         }
-        
+
         if(newProfile.size() > 0) {
             updateService.updateUser(userToEdit, newProfile);
             response.sendRedirect("/user?update=success&&updateUser="+userToEdit);
