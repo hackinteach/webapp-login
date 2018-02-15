@@ -5,7 +5,6 @@
  */
 package io.muic.cs.ooc.webapp.login.router;
 
-import io.muic.cs.ooc.webapp.login.database.MySQL;
 import io.muic.cs.ooc.webapp.login.servlet.*;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
@@ -25,6 +24,7 @@ public class ServletRouter {
         routeables.add(LogoutServlet.class);
         routeables.add(RemoveUserServlet.class);
         routeables.add(ErrorURLServlet.class);
+        routeables.add(EditUserServlet.class);
     }
 
     public void init(Context ctx) {

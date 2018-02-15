@@ -1,14 +1,21 @@
 package io.muic.cs.ooc.webapp.login.services;
 
 import io.muic.cs.ooc.webapp.login.database.MySQL;
-import io.muic.cs.ooc.webapp.login.model.User;
+import org.apache.commons.lang.StringUtils;
 
-public class UserService extends Service{
+import java.util.Map;
 
-    private MySQL mySQL = new MySQL();
+public class UpdateService extends Service{
 
-    public User getUser(String username){
-        return MySQL.getUserbyUsername(username);
+    public void updateUser(String username,Map<String,String> newProfile) {
+        System.out.println("update "+username);
+        for(String key : newProfile.keySet()){
+            String val = newProfile.get(key);
+            if(!StringUtils.isBlank(val))
+            {
+                MySQL.updateInfo(username,key,newProfile.get(key));
+            }
+        }
     }
 
 }
