@@ -41,8 +41,9 @@ public class EditUserServlet extends HttpServlet implements Routeable {
         String email = request.getParameter("email");
         String new_pwd = request.getParameter("new_password");
         String confirm_new_pwd = request.getParameter("cf_password");
+
         UpdateService updateService = new UpdateService();
-        System.out.println(firstname + lastname + email+new_pwd+confirm_new_pwd+username);
+//        System.out.println(firstname + lastname + email+new_pwd+confirm_new_pwd+username);
         Map<String,String> newProfile = new HashMap<>();
         if(!StringUtils.isBlank(username)) {
             newProfile.put("username", username);
@@ -56,20 +57,17 @@ public class EditUserServlet extends HttpServlet implements Routeable {
         if(!StringUtils.isBlank(firstname)){
             newProfile.put("firstname",firstname);
         }
-        if(!StringUtils.isBlank(new_pwd) && !StringUtils.isBlank(confirm_new_pwd)
+        if(!StringUtils.isBlank(new_pwd)
+                && !StringUtils.isBlank(confirm_new_pwd)
                 && new_pwd.equals(confirm_new_pwd)){
             newProfile.put("password",new_pwd);
         }
-
-        for(String val : newProfile.values()){
-            System.out.println(val);
-        }
-
+        
         if(newProfile.size() > 0) {
             updateService.updateUser(userToEdit, newProfile);
-            response.sendRedirect("/user?update=success&&updateUser="+username);
+            response.sendRedirect("/user?update=success&&updateUser="+userToEdit);
         }else{
-            response.sendRedirect("/user");
+            response.sendRedirect("/user?update=fail");
         }
 
 
