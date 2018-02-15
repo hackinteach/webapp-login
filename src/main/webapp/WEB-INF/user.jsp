@@ -18,20 +18,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <%--JS--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${contextPath}/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="${contextPath}/js/bootstrap.js"></script>
+    <%--CSS--%>
     <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/css/common.css" rel="stylesheet">
 
 </head>
 
 <body>
+
 <%
-    if(request.getParameter("create") != null &&
-    request.getParameter("create").equals("success")){
+    if (request.getParameter("create") != null &&
+            request.getParameter("create").equals("success")) {
 %>
-    <script type="text/javascript">
-        alert('Registration successful');
-    </script>
+<script type="text/javascript">
+    bootbox.alert({
+        message: "Registration successful"
+    })
+</script>
 <%
     }
 %>
@@ -66,18 +73,24 @@
         <td><%= u.getEmail() %>
         </td>
         <td>
-            <% User curr = (User)request.getAttribute("user");
-                if(u.getUsername().equals(curr.getUsername())){ %>
-                <button type="button" class="btn btn-outline-light" disabled>Delete</button>
+            <% User curr = (User) request.getAttribute("user");
+                if (u.getUsername().equals(curr.getUsername())) { %>
+            <button type="button" class="btn btn-outline-light" disabled>Delete</button>
             <%
-                }else{
+            } else {
             %>
-            <form action="/remove" method="GET" style="display: inline">
-                <input type="hidden" name="removeUser" value="<%=u.getUsername()%>" />
-                <button type="submit" class="btn btn-outline-danger">Delete</button>
+
+            <form  onsubmit="return confirmDelete()" name="delbtn" action="/remove" method="get" style="display: inline">
+            <%--<form style="display: inline">--%>
+                <input type="hidden" name="username" value="<%=u.getUsername()%>"/>
+                    <script type='text/javascript'>
+                        function confirmDelete() {
+                            return confirm("Are you sure?");
+                        }
+                    </script>
+                <button id="remove" type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
             <%}%>
-            <%--<button type="button" class="btn btn-outline-danger">Delete</button>--%>
             <button type="button" class="btn btn-outline-primary">Edit Profile</button>
         </td>
     </tr>
