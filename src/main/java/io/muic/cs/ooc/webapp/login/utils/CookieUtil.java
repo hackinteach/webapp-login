@@ -14,10 +14,10 @@ public class CookieUtil {
         res.addCookie(cookie);
     }
 
-    public static boolean verifyCookie(HttpServletRequest req, HttpServletResponse res){
+    public static boolean verifyCookie(HttpServletRequest req, HttpServletResponse res) {
         Cookie[] cookies = req.getCookies();
-        for (int i = 0; cookies != null && i < cookies.length; i++){
-            if("userCookie".equals(cookies[i].getName())){
+        for (int i = 0; cookies != null && i < cookies.length; i++) {
+            if ("userCookie".equals(cookies[i].getName())) {
                 return true;
             }
         }
@@ -34,10 +34,10 @@ public class CookieUtil {
         }
     }
 
-    public static User getUser(HttpServletRequest request, HttpServletResponse response){
+    public static User getUser(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; cookies != null && i < cookies.length; i++){
-            if("userCookie".equals(cookies[i].getName())){
+        for (int i = 0; cookies != null && i < cookies.length; i++) {
+            if ("userCookie".equals(cookies[i].getName())) {
                 String username = cookies[i].getValue();
                 return MySQL.getUserbyUsername(username);
 

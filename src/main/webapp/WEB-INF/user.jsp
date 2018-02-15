@@ -80,14 +80,14 @@
             } else {
             %>
 
-            <form  onsubmit="return confirmDelete()" name="delbtn" action="/remove" method="get" style="display: inline">
-            <%--<form style="display: inline">--%>
+            <form onsubmit="return confirmDelete()" name="delbtn" action="/remove" method="get" style="display: inline">
+                <%--<form style="display: inline">--%>
                 <input type="hidden" name="username" value="<%=u.getUsername()%>"/>
-                    <script type='text/javascript'>
-                        function confirmDelete() {
-                            return confirm("Are you sure?");
-                        }
-                    </script>
+                <script type='text/javascript'>
+                    function confirmDelete() {
+                        return confirm("Are you sure?");
+                    }
+                </script>
                 <button id="remove" type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
             <%}%>

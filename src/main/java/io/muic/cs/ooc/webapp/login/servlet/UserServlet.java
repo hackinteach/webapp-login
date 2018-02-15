@@ -2,7 +2,6 @@ package io.muic.cs.ooc.webapp.login.servlet;
 
 import io.muic.cs.ooc.webapp.login.model.User;
 import io.muic.cs.ooc.webapp.login.router.Routeable;
-import io.muic.cs.ooc.webapp.login.services.UserService;
 import io.muic.cs.ooc.webapp.login.utils.CookieUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -23,13 +22,13 @@ public class UserServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!CookieUtil.verifyCookie(req,resp)){
+        if (!CookieUtil.verifyCookie(req, resp)) {
             resp.sendRedirect("/login");
-        }else{
-            User user = CookieUtil.getUser(req,resp);
-            req.setAttribute("user",user);
+        } else {
+            User user = CookieUtil.getUser(req, resp);
+            req.setAttribute("user", user);
             RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
-            rq.include(req,resp);
+            rq.include(req, resp);
         }
     }
 }
