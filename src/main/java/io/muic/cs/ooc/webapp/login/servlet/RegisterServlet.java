@@ -44,7 +44,6 @@ public class RegisterServlet extends HttpServlet implements Routeable {
                 StringUtils.isBlank(lastname) ||
                 StringUtils.isBlank(email);
         RegisterService registerService = new RegisterService(req, resp);
-
         if (!blankFields) {
             if (registerService.dupUser(username)) {
                 String error = "Username already taken. Please try again.";

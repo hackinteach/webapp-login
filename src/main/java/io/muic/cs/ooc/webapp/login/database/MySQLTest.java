@@ -69,11 +69,11 @@ public class MySQLTest {
     public void testGetUserByUsername(){
         User hackinteach = MySQL.getUserbyUsername("hackinteach");
         assertEquals("hackinteach",hackinteach.getUsername());
-        assertEquals("koo",hackinteach.getPassword());
+        assertEquals("koo",hackinteach.getHashpassword());
 
         User admin = MySQL.getUserbyUsername("admin");
         assertEquals("admin",admin.getUsername());
-        assertEquals("1234",admin.getPassword());
+        assertEquals("1234",admin.getHashpassword());
     }
 
     @Test

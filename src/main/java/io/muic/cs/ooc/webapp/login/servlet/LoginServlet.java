@@ -37,7 +37,6 @@ public class LoginServlet extends HttpServlet implements Routeable {
         if (!StringUtils.isBlank(username) && !StringUtils.isBlank(password)) {
             boolean passed = lis.login(username, password);
             if (passed) {
-                System.out.println("Authenticate successful");
                 User user = MySQL.getUserbyUsername(username);
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("/user");

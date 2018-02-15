@@ -2,6 +2,7 @@ package io.muic.cs.ooc.webapp.login.services;
 
 import io.muic.cs.ooc.webapp.login.database.MySQL;
 import io.muic.cs.ooc.webapp.login.model.User;
+import io.muic.cs.ooc.webapp.login.utils.HashingUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

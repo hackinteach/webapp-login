@@ -11,6 +11,4 @@ public final class HashingUtil {
     public static final boolean verifyPassword(String hash, String plain){
         return BCrypt.checkpw(plain,hash);
     }
-
-
 }
