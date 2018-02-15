@@ -45,6 +45,19 @@ public class MySQL {
         }
     }
 
+    public static void updateInfo(String username,String column, String update){
+        try{
+            String query = "update "+dbTable+" set `"+column+"`=? where `username`=?;";
+            preparedStatement = getConnection().prepareStatement(query);
+            preparedStatement.setString(1,update);
+            preparedStatement.setString(2,username);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean isUserExists(String username){
         try{
             String query = "select username from "+dbTable+" where username=?;";
