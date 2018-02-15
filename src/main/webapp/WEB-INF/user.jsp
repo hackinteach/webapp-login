@@ -30,6 +30,12 @@
 
 <body>
 
+<c:if test="${not empty error}">
+    <script type="text/javascript">
+        bootbox.alert('${error}');
+    </script>
+</c:if>
+
 <%
     if (request.getParameter("create") != null &&
             request.getParameter("create").equals("success")) {
@@ -37,6 +43,19 @@
 <script type="text/javascript">
     bootbox.alert({
         message: "Registration successful"
+    })
+</script>
+<%
+    }
+%>
+
+<%
+    if (request.getParameter("update") != null &&
+            request.getParameter("update").equals("success")) {
+%>
+<script type="text/javascript">
+    bootbox.alert({
+        message: "Update profile for " + '<b><%=request.getParameter("updateUser")%></b>' + " success."
     })
 </script>
 <%
@@ -91,7 +110,11 @@
                 <button id="remove" type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
             <%}%>
-            <button type="button" class="btn btn-outline-primary">Edit Profile</button>
+            <form action="/edit" method="get" style="display: inline">
+                <input type="hidden" name="editUser" value="<%=u.getUsername()%>"/>
+                <button type="submit" class="btn btn-outline-primary">Edit Profile</button>
+            </form>
+
         </td>
     </tr>
     <%
