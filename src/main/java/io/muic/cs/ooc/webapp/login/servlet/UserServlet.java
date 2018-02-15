@@ -26,7 +26,6 @@ public class UserServlet extends HttpServlet implements Routeable {
         if(!CookieUtil.verifyCookie(req,resp)){
             resp.sendRedirect("/login");
         }else{
-            UserService userService = new UserService();
             User user = CookieUtil.getUser(req,resp);
             req.setAttribute("user",user);
             RequestDispatcher rq = req.getRequestDispatcher("WEB-INF/user.jsp");
