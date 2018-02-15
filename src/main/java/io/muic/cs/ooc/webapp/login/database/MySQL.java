@@ -9,8 +9,8 @@ import java.util.List;
 
 public class MySQL {
 
-//    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3307/login?useSSL=false";
-        private static final String dbUrl = "jdbc:mysql://database:3306/login?useSSL=false";
+    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3307/login?useSSL=false";
+//        private static final String dbUrl = "jdbc:mysql://database:3306/login?useSSL=false";
     private static final String dbUser = "ooc";
     private static final String dbPassword = "muic";
     private static final String dbTable = "credentials";
