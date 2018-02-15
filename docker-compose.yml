@@ -35,7 +35,7 @@ services:
     networks:
       - webnet
     ports:
-      - "3307:3307"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: "login"
       MYSQL_USER: "ooc"
