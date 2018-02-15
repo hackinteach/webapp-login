@@ -23,8 +23,14 @@ public class RemoveUserServlet extends HttpServlet implements Routeable {
             resp.sendRedirect("/login");
             return;
         }
-        String username = req.getParameter("removeUser");
-        MySQL.removeUserbyUsername(username);
+//        @TODO Prevent backend remove.
+        String username = req.getParameter("username");
+//        User curr = (User)req.getSession().getAttribute("user");
+        User curr = CookieUtil.getUser(req,resp);
+        if(!username.equals(curr.getUsername())){
+            MySQL.removeUserbyUsername(username);
+        }
         resp.sendRedirect("/user");
+
     }
 }
