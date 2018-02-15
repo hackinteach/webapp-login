@@ -25,7 +25,16 @@
 </head>
 
 <body>
-
+<%
+    if(request.getParameter("create") != null &&
+    request.getParameter("create").equals("success")){
+%>
+    <script type="text/javascript">
+        alert('Registration successful');
+    </script>
+<%
+    }
+%>
 <h2 class="form-heading" style="color:whitesmoke" align="center">Welcome, ${user.getFirstname()}</h2>
 <p style="color:whitesmoke" align="center">${user.getFirstname()} ${user.getLastname()}, ${user.getEmail()}</p>
 <br/>
