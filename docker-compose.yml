@@ -5,11 +5,20 @@ networks:
     webnet:
       driver: bridge
 services:
+  webapp:
+    build: ./
+    restart: on-failure
+    networks:
+      - webnet
+    links:
+      - database
+    ports:
+      - "8082:8082"
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
       - database
-    # network_mode: "bridge"  
     networks:
       - webnet
     environment:
@@ -18,7 +27,6 @@ services:
     ports:
       - "8080:80"
 
-
   database:
     image: mysql
     restart: on-failure
@@ -26,9 +34,8 @@ services:
       - ./mysql-data:/var/lib/mysql:rw
     networks:
       - webnet
-    # network_mode: "bridge"
     ports:
-      - "3307:3306"
+      - "3307:3307"
     environment:
       MYSQL_DATABASE: "login"
       MYSQL_USER: "ooc"
