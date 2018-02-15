@@ -39,8 +39,8 @@ public class CookieUtil {
         for (int i = 0; cookies != null && i < cookies.length; i++){
             if("userCookie".equals(cookies[i].getName())){
                 String username = cookies[i].getValue();
-                User user = MySQL.getUserbyUsername(username);
-                return user;
+                return MySQL.getUserbyUsername(username);
+
             }
         }
         return null;

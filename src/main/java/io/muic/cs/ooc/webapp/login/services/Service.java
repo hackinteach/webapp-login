@@ -1,7 +1,5 @@
 package io.muic.cs.ooc.webapp.login.services;
 
-import io.muic.cs.ooc.webapp.login.database.MySQL;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
