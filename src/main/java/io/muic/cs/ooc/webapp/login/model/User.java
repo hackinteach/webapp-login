@@ -21,7 +21,7 @@ public class User extends AbstractEntity implements Serializable {
     private String username;
 
     @Column(nullable = false)
-    private String password;
+    private String hashpassword;
 
     @Column(nullable = false)
     private String firstname;
@@ -72,12 +72,12 @@ public class User extends AbstractEntity implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashpassword() {
+        return hashpassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashpassword(String hashpassword) {
+        this.hashpassword = hashpassword;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class User extends AbstractEntity implements Serializable {
         return "User{" +
                 "id=" + this.getId() +
                 ", username=" + this.getUsername() +
-                ", password=" + this.getPassword() +
+                ", hashpassword=" + this.getHashpassword() +
                 '}';
     }
 }
