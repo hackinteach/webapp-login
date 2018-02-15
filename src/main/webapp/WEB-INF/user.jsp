@@ -50,8 +50,8 @@
 %>
 
 <%
-    if (request.getParameter("update") != null &&
-            request.getParameter("update").equals("success")) {
+    if (request.getParameter("update") != null){
+       if(request.getParameter("update").equals("success")) {
 %>
 <script type="text/javascript">
     bootbox.alert({
@@ -59,7 +59,15 @@
     })
 </script>
 <%
-    }
+    }else if(request.getParameter("update").equals("fail")){
+%>
+<script type="text/javascript">
+    bootbox.alert({
+        message : "Update profile failed, please try again."
+    })
+</script>
+<%
+    }}
 %>
 <h2 class="form-heading" style="color:whitesmoke" align="center">Welcome, ${user.getFirstname()}</h2>
 <p style="color:whitesmoke" align="center">${user.getFirstname()} ${user.getLastname()}, ${user.getEmail()}</p>

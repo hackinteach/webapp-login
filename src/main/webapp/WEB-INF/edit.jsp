@@ -24,13 +24,8 @@
 </head>
 <body>
 
-<c:if test="${not empty error}">
-    <script type="text/javascript">
-        bootbox.alert('${error}');
-    </script>
-</c:if>
-
 <form action="/edit" method="post">
+
     <table class="table table-hover table-dark" align="center" style="border: 2px solid whitesmoke">
         <thead>
         <tr>
@@ -77,9 +72,7 @@
                 <%= u.getLastname() %>
             </td>
             <td>
-
-                    <input name="lastname" type="text" class="form-control" placeholder="new last name"/>
-
+                <input name="lastname" type="text" class="form-control" placeholder="new last name"/>
             </td>
         </tr>
 
@@ -91,9 +84,7 @@
                 <%= u.getEmail() %>
             </td>
             <td>
-
-                    <input name="email" type="text" class="form-control" placeholder="new email"/>
-
+                <input name="email" type="text" class="form-control" placeholder="new email"/>
             </td>
         </tr>
 
@@ -104,10 +95,8 @@
             <td>
             </td>
             <td>
-
-                    <input name="new_password" type="password" class="form-control" placeholder="new password"/>
-                    <input name="cf_password" type="password" class="form-control" placeholder="confirm new password"/>
-
+                <input name="new_password" type="password" class="form-control" placeholder="new password"/>
+                <input name="cf_password" type="password" class="form-control" placeholder="confirm new password"/>
             </td>
         </tr>
         <%
@@ -116,10 +105,10 @@
         <tbody>
     </table>
 
-        <div class="form-group text-center">
-            <button class="btn btn-outline-light" type="submit">Update</button>
-            <button class="btn btn-outline-info" type="button" onclick="window.location.href='/user'">Cancel</button>
-        </div>
+    <div class="form-group text-center">
+        <button class="btn btn-outline-light" type="submit">Update</button>
+        <button class="btn btn-outline-info" type="subbmit" onclick="window.location.href='/user'">Cancel</button>
+    </div>
 
 </form>
 </body>
