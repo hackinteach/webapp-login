@@ -5,6 +5,7 @@ import io.muic.cs.ooc.webapp.login.model.User;
 import io.muic.cs.ooc.webapp.login.router.Routeable;
 import io.muic.cs.ooc.webapp.login.services.LoginService;
 import io.muic.cs.ooc.webapp.login.utils.CookieUtil;
+import io.muic.cs.ooc.webapp.login.utils.MyUtils;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet implements Routeable {
                 lis.error(request, response, error, "WEB-INF/login.jsp");
             }
         } else {
-            String error = "Username and Password cannot be blank";
+            String error = "Invalid Login";
             lis.error(request, response, error, "WEB-INF/login.jsp");
         }
     }

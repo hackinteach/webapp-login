@@ -1,6 +1,7 @@
 package io.muic.cs.ooc.webapp.login.services;
 
 import io.muic.cs.ooc.webapp.login.database.MySQL;
+import io.muic.cs.ooc.webapp.login.utils.MyUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +15,16 @@ public class LoginService extends Service {
     public LoginService(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-
     }
 
     public boolean login(String username, String password) {
+        if(!MyUtils.validateString(username) || !MyUtils.validateString(password)){
+            return false;
+        }
         boolean authorized = MySQL.authenticate(username, password);
-        createCookie(username);
+        if(authorized){
+            createCookie(username);
+        }
         return authorized;
     }
 

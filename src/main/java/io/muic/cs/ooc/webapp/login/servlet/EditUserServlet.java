@@ -5,6 +5,7 @@ import io.muic.cs.ooc.webapp.login.model.User;
 import io.muic.cs.ooc.webapp.login.router.Routeable;
 import io.muic.cs.ooc.webapp.login.services.UpdateService;
 import io.muic.cs.ooc.webapp.login.utils.CookieUtil;
+import io.muic.cs.ooc.webapp.login.utils.MyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.sql.Update;
 
@@ -45,21 +46,22 @@ public class EditUserServlet extends HttpServlet implements Routeable {
         UpdateService updateService = new UpdateService();
 //        System.out.println(firstname + lastname + email+new_pwd+confirm_new_pwd+username);
         Map<String,String> newProfile = new HashMap<>();
-        if(!StringUtils.isBlank(username)) {
+        if(!StringUtils.isBlank(username) && !MyUtils.validateString(username)) {
             newProfile.put("username", username);
         }
         if(!StringUtils.isBlank(email)){
             newProfile.put("email",email);
         }
-        if(!StringUtils.isBlank(lastname)){
+        if(!StringUtils.isBlank(lastname) && !MyUtils.validateString(lastname)){
             newProfile.put("lastname",lastname);
         }
-        if(!StringUtils.isBlank(firstname)){
+        if(!StringUtils.isBlank(firstname) && !MyUtils.validateString(firstname)){
             newProfile.put("firstname",firstname);
         }
         if(!StringUtils.isBlank(new_pwd)
                 && !StringUtils.isBlank(confirm_new_pwd)
-                && new_pwd.equals(confirm_new_pwd)){
+                && new_pwd.equals(confirm_new_pwd)
+                && !MyUtils.validateString(new_pwd)){
             newProfile.put("password",new_pwd);
         }
 
