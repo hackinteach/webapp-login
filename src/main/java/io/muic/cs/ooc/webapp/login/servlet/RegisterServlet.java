@@ -31,12 +31,12 @@ public class RegisterServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String vpassword = req.getParameter("verifyPassword");
-        String firstname = req.getParameter("firstname");
-        String lastname = req.getParameter("lastname");
-        String email = req.getParameter("email");
+        String username = req.getParameter("username").trim();
+        String password = req.getParameter("password").trim();
+        String vpassword = req.getParameter("verifyPassword").trim();
+        String firstname = req.getParameter("firstname").trim();
+        String lastname = req.getParameter("lastname").trim();
+        String email = req.getParameter("email").trim();
         Boolean blankFields = StringUtils.isBlank(username) ||
                 StringUtils.isBlank(password) ||
                 StringUtils.isBlank(vpassword) ||

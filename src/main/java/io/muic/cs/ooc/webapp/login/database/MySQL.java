@@ -51,11 +51,17 @@ public class MySQL {
             String query;
             if (column.equals("password")) {
                 String hpassword = HashingUtil.hashPassword(update);
-                query = "update " + dbTable + " set `hashpassword`='" + hpassword + "' where `id`='" + id + "';";
+                query = "update " + dbTable + " set `hashpassword`=? where `id`=?;";
+                preparedStatement = getConnection().prepareStatement(query);
+                preparedStatement.setString(1,hpassword);
+                preparedStatement.setString(2,id);
             } else {
-                query = "update " + dbTable + " set `" + column + "`='" + update + "' where `id`='" + id + "';";
+                query = "update " + dbTable + " set ?=? where `id`=?;";
+                preparedStatement = getConnection().prepareStatement(query);
+                preparedStatement.setString(1,"'"+column+"'");
+                preparedStatement.setString(2,"'"+update+"'");
+                preparedStatement.setString(2,"'"+id+"'");
             }
-            preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

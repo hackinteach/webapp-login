@@ -35,12 +35,12 @@ public class EditUserServlet extends HttpServlet implements Routeable {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String new_pwd = request.getParameter("new_password");
-        String confirm_new_pwd = request.getParameter("cf_password");
+        String username = request.getParameter("username").trim();
+        String firstname = request.getParameter("firstname").trim();
+        String lastname = request.getParameter("lastname").trim();
+        String email = request.getParameter("email").trim();
+        String new_pwd = request.getParameter("new_password").trim();
+        String confirm_new_pwd = request.getParameter("cf_password").trim();
 
         UpdateService updateService = new UpdateService();
 //        System.out.println(firstname + lastname + email+new_pwd+confirm_new_pwd+username);
