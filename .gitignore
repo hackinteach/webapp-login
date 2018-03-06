@@ -1,5 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
+.vscode
+.settings 
+.classpath
+.project
 tomcat.8082/
 target/
 pom.xml.tag
